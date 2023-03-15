@@ -336,11 +336,17 @@
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
-    <service id="App\Controller\HelloController" class="App\Controller\HelloController" public="true" autoconfigure="true">
+    <service id="App\Controller\HelloController" class="App\Controller\HelloController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Service\DiceRollService"/>
+      <argument type="service" id="App\Service\CoinFlipService"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CshazM0.App\Controller\HelloController"/>
+      </call>
     </service>
-    <service id="App\Service\DiceRollService" class="App\Service\DiceRollService" autoconfigure="true"/>
+    <service id="App\Service\CoinFlipService" class="App\Service\CoinFlipService" autowire="true" autoconfigure="true"/>
+    <service id="App\Service\DiceRollService" class="App\Service\DiceRollService" autowire="true" autoconfigure="true"/>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
       <tag name="kernel.event_subscriber"/>
@@ -6051,9 +6057,9 @@
     <service id="framework_extra_bundle.argument_name_convertor" class="Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter">
       <argument type="service" id="argument_metadata_factory"/>
     </service>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HelloController" class="App\Controller\HelloController" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HelloController" class="App\Controller\HelloController" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\HelloController" class="App\Controller\HelloController" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HelloController" class="App\Controller\HelloController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HelloController" class="App\Controller\HelloController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\HelloController" class="App\Controller\HelloController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.7nzbL4K" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
