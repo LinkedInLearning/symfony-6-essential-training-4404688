@@ -3,3 +3,11 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+hello_world:
+    path: /hello/world
+    controller: App\Controller\HelloController::world
+    
+hello_name:
+    path: /hello/{name}
+    controller: App\Controller\HelloController::name
