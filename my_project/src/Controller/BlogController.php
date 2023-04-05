@@ -88,8 +88,22 @@ class BlogController extends AbstractController
         //
         // You can also leverage Symfony's 'dd()' function that dumps and
         // stops the execution
+		
+		$array = [
+			'greeting' => 'Hello World',
+		];
+		
+		$object = new \stdClass();
+		$object->greeting = 'Hello World';
 
-        return $this->render('blog/post_show.html.twig', ['post' => $post]);
+        return $this->render('blog/post_show.html.twig', 
+			[
+				'post' => $post,
+				'hello' => 'Hello World',
+				'array' => $array,
+				'object' => $object,
+			]
+		);
     }
 
     /**
