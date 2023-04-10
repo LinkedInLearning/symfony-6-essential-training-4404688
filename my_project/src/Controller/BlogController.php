@@ -117,7 +117,6 @@ class BlogController extends AbstractController
     }
 	
 	private function hello_world() {
-		sleep (2);
 		return 'Hello World but slower';
 	}
 
