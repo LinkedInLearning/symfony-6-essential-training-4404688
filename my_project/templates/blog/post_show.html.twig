@@ -4,8 +4,8 @@
 
 {% block main %}
     <h1>{{ post.title }}</h1>
-    <h2>{{ array|json_encode }}</h2>
-    <h2>{{ object|json_encode }}</h2>
+    <h2>{{ array|json_encode|lower }}</h2>
+    <h2>{{ object|json_encode|upper }}</h2>
 
     <p class="post-metadata">
         <span class="metadata"><i class="fa fa-calendar"></i> {{ post.publishedAt|format_datetime('long', 'medium', '', 'UTC') }}</span>
