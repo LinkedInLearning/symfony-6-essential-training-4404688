@@ -1,4 +1,8 @@
 framework:
     cache:
         app: cache.adapter.filesystem
+        # app: cache.adapter.redis
+        # app: cache.adapter.memcached
+        # app: cache.adapter.pdo
+
         system: cache.adapter.system

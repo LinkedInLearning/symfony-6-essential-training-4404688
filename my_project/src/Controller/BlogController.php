@@ -28,6 +28,9 @@ use Symfony\Component\HttpKernel\Attribute\Cache;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 
 /**
  * Controller used to manage blog contents in the public part of the site.
@@ -38,6 +41,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/blog')]
 class BlogController extends AbstractController
 {
+	
     /**
      * NOTE: For standard formats, Symfony will also automatically choose the best
      * Content-Type header for the response.
@@ -73,7 +77,7 @@ class BlogController extends AbstractController
      * See https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html
      */
     #[Route('/posts/{slug}', name: 'blog_post', methods: ['GET'])]
-    public function postShow(Post $post): Response
+    public function postShow(Post $post, CacheInterface $cache ): Response
     {
         // Symfony's 'dump()' function is an improved version of PHP's 'var_dump()' but
         // it's not available in the 'prod' environment to prevent leaking sensitive information.
@@ -89,12 +93,18 @@ class BlogController extends AbstractController
         // You can also leverage Symfony's 'dd()' function that dumps and
         // stops the execution
 		
+		$string = $cache->get( 'hello_world', function( ItemInterface $item ) {
+			$item->expiresAfter( 10 );
+			
+			return $this->hello_world();
+		} );
+		
 		$array = [
-			'greeting' => 'Hello World',
+			'greeting' => $string,
 		];
 		
 		$object = new \stdClass();
-		$object->greeting = 'Hello World';
+		$object->greeting = $string;
 
         return $this->render('blog/post_show.html.twig', 
 			[
@@ -105,6 +115,11 @@ class BlogController extends AbstractController
 			]
 		);
     }
+	
+	private function hello_world() {
+		sleep (2);
+		return 'Hello World but slower';
+	}
 
     /**
      * NOTE: The ParamConverter mapping is required because the route parameter
