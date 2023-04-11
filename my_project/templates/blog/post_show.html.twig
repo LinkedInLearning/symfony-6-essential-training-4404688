@@ -16,6 +16,7 @@
 
     {{ include('blog/_post_tags.html.twig') }}
 
+    <turbo-frame id="comments">
     <div id="post-add-comment" class="well">
         {# The 'IS_AUTHENTICATED_FULLY' role ensures that the user has entered
         their credentials (login + password) during this session. If they
@@ -58,6 +59,7 @@
             <p>{{ 'post.no_comments'|trans }}</p>
         </div>
     {% endfor %}
+    </turbo-frame>
 {% endblock %}
 
 {% block sidebar %}
