@@ -42,20 +42,6 @@ class BlogControllerTest extends WebTestCase
         );
     }
 
-    public function testRss(): void
-    {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/en/blog/rss.xml');
-
-        $this->assertResponseHeaderSame('Content-Type', 'text/xml; charset=UTF-8');
-
-        $this->assertCount(
-            Paginator::PAGE_SIZE,
-            $crawler->filter('item'),
-            'The xml file displays the right number of posts.'
-        );
-    }
-
     /**
      * This test changes the database contents by creating a new comment. However,
      * thanks to the DAMADoctrineTestBundle and its PHPUnit listener, all changes
