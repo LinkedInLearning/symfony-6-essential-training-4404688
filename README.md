@@ -22,9 +22,9 @@ To resolve this issue:
 
 ## Installing
 1. To use these exercise files, you must have the following installed:
-	- [list of requirements for course]
+	- [Composer](https://getcomposer.org/)
 2. Clone this repository into your local machine using the terminal (Mac), CMD (Windows), or a GUI tool like SourceTree.
-3. [Course-specific instructions]
+3. Some chapters will continue in the same project, while others may be in a distinct directory. You will want to `composer install` each time you switch to a new chapter.
 
 
 [0]: # (Replace these placeholder URLs with actual course URLs)
